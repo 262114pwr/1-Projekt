@@ -14,12 +14,10 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
-    static int liczba_pon, liczba_wto, liczba_sro, liczba_czw, liczba_pia, liczba_sob, liczba_nie;
+    //int liczba_pon, liczba_wto, liczba_sro, liczba_czw, liczba_pia, liczba_sob, liczba_nie;
 
 private slots:
     void on_input_godzin_spinBox_valueChanged(int arg1);
-
-    void on_input_godzin_spinBox_textChanged(const QString &arg1);
 
     void on_input_pon_spinBox_valueChanged(int arg1);
 
@@ -37,7 +35,18 @@ private slots:
 
     void on_input_nie_spinBox_7_valueChanged(int arg1);
 
+    void on_input_limit_spinBox_valueChanged(int arg1);
+
+    void on_input_ilosc_przerw_spinBox_valueChanged(int arg1);
+
+    void on_input_ilosc_do_przerwy_spinBox_valueChanged(int arg1);
+
+    void on_input_dlugosc_przerwy_spinBox_valueChanged(int arg1);
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::Widget *ui;
+    int liczba_pon, liczba_wto, liczba_sro, liczba_czw, liczba_pia, liczba_sob, liczba_nie, limit_godz, ilosc_przerw, ilosc_do_przerwy, dlugosc_przerwy;
 };
 #endif // WIDGET_H
