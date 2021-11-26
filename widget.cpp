@@ -6,7 +6,7 @@ Widget::Widget(QWidget *parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    liczba_pon = 0; // zmienne prywatna potrzebne do liczenia
+    liczba_pon = 0; // zmienne prywatne potrzebne do liczenia
     liczba_wto = 0;
     liczba_sro = 0;
     liczba_czw = 0;
@@ -42,13 +42,13 @@ void Widget::on_input_godzin_spinBox_valueChanged(int ilosc_godzin) // procedura
     if (ilosc_godzin >= limit_godz){ // jeśli godzin będzie więcej niż ustawiono wyświetli się komunikat:
         ui->label_invisible->setStyleSheet("QLabel {background-color : yellow; color : red; }");
         ui->label_invisible->setText("Uwaga!!!!");
-    } else {
+    } else { // zniknięcie uwagi
         ui->label_invisible->setStyleSheet("QLabel {background-color : none; color : none; }");
         ui->label_invisible->setText("");
     }
 
-    przerwa_output = (double(ilosc_godzin)/double(ilosc_do_przerwy)) * ilosc_przerw;
-    ui->output_przerwa->setText(QString::number(przerwa_output)); // ile przerw powinniśmy zrobić
+    przerwa_output = (double(ilosc_godzin)/double(ilosc_do_przerwy)) * ilosc_przerw; // ile przerw mamy
+    ui->output_przerwa->setText(QString::number(przerwa_output));
     czas_przerwy_output = przerwa_output * dlugosc_przerwy;
     ui->output_czas_przerw->setText(QString::number(czas_przerwy_output)); // ile to czasu
 }
@@ -124,7 +124,7 @@ void Widget::on_input_dlugosc_przerwy_spinBox_valueChanged(int arg1)
 
 void Widget::on_pushButton_3_clicked()
 {
-    liczba_pon = 0; // zmienne prywatna potrzebne do liczenia
+    liczba_pon = 0; // reset wszystkiego
     liczba_wto = 0;
     liczba_sro = 0;
     liczba_czw = 0;
@@ -136,8 +136,8 @@ void Widget::on_pushButton_3_clicked()
     ilosc_do_przerwy = 1;
     dlugosc_przerwy = 5;
     ui->output_przerwa->setText(QString::number(0));
-    ui->output_czas_przerw->setText(QString::number(0)); // ile to czasu
-    ui->output_tydzien_godzin->setText(QString::number(0)); // komunikaty
+    ui->output_czas_przerw->setText(QString::number(0));
+    ui->output_tydzien_godzin->setText(QString::number(0));
     ui->output_srednia->setText(QString::number(0));
     ui->input_godzin_spinBox->setValue(0);
     ui->input_pon_spinBox->setValue(0);

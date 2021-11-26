@@ -14,7 +14,6 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
-    //int liczba_pon, liczba_wto, liczba_sro, liczba_czw, liczba_pia, liczba_sob, liczba_nie;
 
 private slots:
     void on_input_godzin_spinBox_valueChanged(int arg1);
