@@ -1,11 +1,13 @@
 #include "widget.h"
 #include "ui_widget.h"
 
+
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    chart_window = new QMainWindow(this); // nowy obiekt niejawnie
     liczba_pon = 0; // zmienne prywatne potrzebne do liczenia
     liczba_wto = 0;
     liczba_sro = 0;
@@ -17,6 +19,16 @@ Widget::Widget(QWidget *parent)
     ilosc_przerw = 1;
     ilosc_do_przerwy = 1;
     dlugosc_przerwy = 5;
+    ilosc_sekund = 0;
+    ilosc_godzin = 0;
+    set0 = new QBarSet("Poniedziałek, Wtorek, Środa, Czwartek, Piątek, Sobota, Niedziela"); // ile wartosci
+    series = new QBarSeries(); // utworzenie obiekty/zmienne
+    chart = new QChart(); // 7 kategorii
+    axisX = new QBarCategoryAxis();
+    axisY = new QValueAxis();
+    chartView = new QChartView(chart);
+
+
 }
 
 Widget::~Widget()
@@ -153,3 +165,53 @@ void Widget::on_pushButton_3_clicked()
     ui->input_ilosc_przerw_spinBox->setValue(1);
 
 }
+
+void Widget::on_pushButton_2_clicked()
+{
+   if (set0->count() != 0) // zmienna barset(slupki);
+         set0->remove(0, set0->count()); // reset
+   *set0 << liczba_pon << liczba_wto << liczba_sro << liczba_czw << liczba_pia << liczba_sob << liczba_nie;
+   set0->setColor("magenta"); // 7 zmiennych; przelaczamy; 1 bar(set0) 7 pozycji
+   series->append(set0); // dokladamy do serii, bo nie mozemy dodac samego bar
+   chart->addSeries(series); //dodajemy serie do wykresu
+   chart->setTitle("Czas przed komputerem w tygodniu");
+   //chart->setAnimationOptions(QChart::SeriesAnimations); // jak sie pojawia
+
+   categories << "Poniedziałek" << "Wtorek" << "Środa" << "Czwartek" << "Piątek" << "Sobota" << "Niedziela";
+// napisy pod spodem
+   axisX->append(categories); // podpis pod osia X; klasa dodaje kategorie do osi wykresu
+   chart->addAxis(axisX, Qt::AlignBottom); // pod wykresem
+   series->attachAxis(axisX); // serie dodajemy do osi X; Dołącza oś określoną przez oś do serii
+
+   axisY->setRange(0,24); // ograniczenie
+   chart->addAxis(axisY, Qt::AlignLeft); // Y po lewej
+   series->attachAxis(axisY); // dodajemy serie do osi y
+   chart->legend()->setVisible(false); // brak legendy
+
+   // chartView->setRenderHint(QPainter::Antialiasing);
+   chart_window->setCentralWidget(chartView); // nowe okienko na srodku
+   chart_window->resize(820, 600); // o takiej wielkosci
+   chart_window->show(); // pokazuje sie
+
+}
+
+
+void Widget::on_pushButton_4_clicked()
+{
+    this->czas_start = QTime::currentTime(); // rozpoczęcie odliczania
+    czas_start_text = czas_start.toString("hh:mm"); // zamiana na str
+    ui->lcdNumber_czas_start->display(czas_start_text); // wyswietlanie czasu
+}
+
+
+void Widget::on_pushButton_5_clicked()
+{
+    this->czas_stop = QTime::currentTime(); // zakonczenie odliczania
+    czas_stop_text = czas_stop.toString("hh:mm"); // zamiana na str w formacie hh:mm
+    ui->lcdNumber_czas_stop->display(czas_stop_text); // wyswietlanie czasu
+    ilosc_sekund = czas_start.secsTo(czas_stop); // od start do stop liczenie sekund; ile sekund bylo
+    ui->output_czas_sekundy->setText(QString::number(ilosc_sekund)); // wyswietlenie ilosci sekund
+    ilosc_godzin = ilosc_sekund / 3600; // wyliczenie ilosci godzin
+    ui->input_godzin_spinBox->setValue(ilosc_godzin); // ustawienie ilosc_godzin do wyliczen
+}
+

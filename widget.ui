@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1021</width>
-    <height>451</height>
+    <width>1199</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="font">
@@ -21,13 +21,13 @@
   <property name="autoFillBackground">
    <bool>true</bool>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>1001</width>
-     <height>426</height>
+     <width>1026</width>
+     <height>461</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -36,7 +36,6 @@
       <property name="font">
        <font>
         <pointsize>14</pointsize>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -133,7 +132,6 @@
       <property name="font">
        <font>
         <pointsize>16</pointsize>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -273,7 +271,6 @@
       <property name="font">
        <font>
         <pointsize>14</pointsize>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -505,6 +502,79 @@
      <widget class="QPushButton" name="pushButton_2">
       <property name="text">
        <string>Wykres</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="7" colspan="2">
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="text">
+       <string>Czas Start</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="7" colspan="2">
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="text">
+       <string>Czas Stop</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="9" colspan="2">
+     <widget class="QLCDNumber" name="lcdNumber_czas_start">
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="digitCount">
+       <number>5</number>
+      </property>
+      <property name="value" stdset="0">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="9" colspan="2">
+     <widget class="QLCDNumber" name="lcdNumber_czas_stop">
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="digitCount">
+       <number>5</number>
+      </property>
+      <property name="value" stdset="0">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="8">
+     <widget class="QLabel" name="output_czas_sekundy">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="7">
+     <widget class="QLabel" name="label_10">
+      <property name="text">
+       <string>Zmierzony czas:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="9">
+     <widget class="QLabel" name="label_11">
+      <property name="text">
+       <string>w sekundach</string>
       </property>
      </widget>
     </item>
